@@ -1,0 +1,95 @@
+[26-May-2025 22:56:36 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 22:56:40 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 22:57:04 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 22:57:05 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 22:57:06 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 22:57:14 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 22:59:30 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(37): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 37
+[26-May-2025 23:01:53 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:44
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(44): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 44
+[26-May-2025 23:01:55 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:44
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(44): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 44
+[26-May-2025 23:01:56 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:44
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(44): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 44
+[26-May-2025 23:04:57 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php:44
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php(44): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/login.php on line 44
+[26-May-2025 23:23:04 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[26-May-2025 23:24:19 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[26-May-2025 23:24:22 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[26-May-2025 23:24:23 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[26-May-2025 23:29:12 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[26-May-2025 23:29:16 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[26-May-2025 23:29:30 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_wali' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(32): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 32
+[27-May-2025 05:10:55 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'nama_lengkap' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php:45
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php(45): mysqli->prepare()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/wali_murid/edit_profil.php on line 45

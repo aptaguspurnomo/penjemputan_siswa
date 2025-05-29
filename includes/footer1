@@ -1,0 +1,60 @@
+<?php
+// Pastikan koneksi masih aktif
+if (!isset($conn) || $conn->connect_error) {
+    // Attempt to include db.php from a relative path.
+    // Adjust this path if your footer.php is in a different directory than db.php
+    $db_path_1 = __DIR__ . '/../includes/db.php'; // Common: footer in 'templates', db in 'includes'
+    $db_path_2 = __DIR__ . '/db.php';             // Common: footer and db in 'includes'
+    $db_path_3 = __DIR__ . '/../db.php';          // Common: footer in 'includes', db in root
+
+    if (file_exists($db_path_1)) {
+        include $db_path_1;
+    } elseif (file_exists($db_path_2)) {
+        include $db_path_2;
+    } elseif (file_exists($db_path_3)) {
+        include $db_path_3;
+    } else {
+        // Fallback or error if db.php cannot be found
+        // error_log("footer.php: db.php not found. Using default footer text.");
+    }
+}
+
+// Ambil teks footer
+$footer_text = 'Aplikasi Penjemputan Siswa © 2025'; // Default
+
+// Check if $conn is set, is a mysqli object, and connection is active before querying
+if (isset($conn) && $conn instanceof mysqli && empty($conn->connect_error)) {
+    try {
+        $query = "SELECT footer_text FROM pengaturan WHERE id = 1";
+        $result = $conn->query($query);
+        if ($result && $result->num_rows > 0) {
+            $footer_db_data = $result->fetch_assoc();
+            if (isset($footer_db_data['footer_text']) && !empty(trim($footer_db_data['footer_text']))) {
+                $footer_text = $footer_db_data['footer_text'];
+            }
+        }
+        if ($result) {
+            $result->free();
+        }
+    } catch (Exception $e) {
+        // Tangani error query
+        error_log("Error fetching footer text from DB in footer.php: " . $e->getMessage());
+    }
+} else {
+    // error_log("footer.php: Database connection not available or invalid. Using default footer text.");
+}
+
+// The main content would have been output before this file is included.
+// The closing </main> tag should ideally be in the file that includes this footer,
+// or in the main layout file that opened it.
+// </main> 
+?>
+<footer class="bg-blue-600 text-white p-4 mt-6 w-screen relative left-1/2 -translate-x-1/2">
+    <div class="container mx-auto text-center">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            <?php echo htmlspecialchars($footer_text); ?>
+        </marquee>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,7 @@
+{
+    "name": "username/penjemputan_siswa",
+    "description": "Aplikasi Penjemputan Siswa berbasis web",
+    "require": {
+        "phpoffice/phpspreadsheet": "^1.18"
+    }
+}

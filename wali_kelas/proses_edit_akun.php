@@ -1,0 +1,160 @@
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+// Untuk development, tampilkan error. Untuk produksi, log error.
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+
+// BAGIAN 1: VERIFIKASI SESI DAN ROLE
+if (!isset($_SESSION['user_id']) || !isset($_SESSION['role']) || $_SESSION['role'] !== 'wali_kelas') {
+    $_SESSION['flash_message_akun_wk'] = ['type' => 'error', 'messages' => ['Sesi tidak valid atau telah berakhir.']];
+    header('Location: login.php');
+    exit;
+}
+
+$user_id_saat_ini = $_SESSION['user_id'];
+$username_saat_ini = $_SESSION['username'];
+$nama_saat_ini = $_SESSION['nama_user'] ?? '';
+
+// BAGIAN 2: KONEKSI DATABASE
+$db_included = false;
+if (file_exists(__DIR__ . '/../includes/db.php')) {
+    include_once __DIR__ . '/../includes/db.php';
+    $db_included = true;
+}
+
+if (!$db_included || !isset($conn) || (is_object($conn) && property_exists($conn, 'connect_error') && $conn->connect_error)) {
+    $db_error_message = "Kesalahan sistem: Tidak dapat terhubung ke database.";
+    // Tambahkan detail error jika ada
+    $_SESSION['flash_message_akun_wk'] = ['type' => 'error', 'messages' => [$db_error_message]];
+    header('Location: edit_akun.php');
+    exit;
+}
+
+// BAGIAN 3: PROSES DATA JIKA METODE ADALAH POST
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Menggunakan nama field dari form: username_wk, nama_wk, password_baru_wk, konfirmasi_password_baru_wk
+    $username_baru = isset($_POST['username_wk']) ? trim($_POST['username_wk']) : '';
+    $nama_baru = isset($_POST['nama_wk']) ? trim($_POST['nama_wk']) : '';
+    $password_baru = isset($_POST['password_baru_wk']) ? $_POST['password_baru_wk'] : '';
+    $konfirmasi_password_baru = isset($_POST['konfirmasi_password_baru_wk']) ? $_POST['konfirmasi_password_baru_wk'] : '';
+
+    // VALIDASI DATA
+    $errors = [];
+    if (empty($username_baru)) {
+        $errors[] = "Username tidak boleh kosong.";
+    } elseif (!preg_match('/^[a-zA-Z0-9_.]+$/', $username_baru)) {
+        $errors[] = "Username hanya boleh mengandung huruf, angka, titik (.), dan underscore (_).";
+    } elseif (strlen($username_baru) < 4) {
+        $errors[] = "Username minimal 4 karakter.";
+    }
+
+    if (empty($nama_baru)) {
+        $errors[] = "Nama lengkap tidak boleh kosong.";
+    }
+
+    if (!empty($password_baru)) {
+        if (strlen($password_baru) < 6) {
+            $errors[] = "Password baru minimal 6 karakter.";
+        }
+        if ($password_baru !== $konfirmasi_password_baru) {
+            $errors[] = "Konfirmasi password baru tidak cocok.";
+        }
+    }
+
+    // Cek apakah username baru sudah ada (jika berbeda dengan username saat ini)
+    if ($username_baru !== $username_saat_ini && !empty($username_baru) && empty($errors)) {
+        $sql_cek_username = "SELECT id FROM users WHERE username = ? AND id != ?";
+        $stmt_cek = $conn->prepare($sql_cek_username);
+        if ($stmt_cek) {
+            $stmt_cek->bind_param("si", $username_baru, $user_id_saat_ini);
+            $stmt_cek->execute();
+            $stmt_cek->store_result();
+            if ($stmt_cek->num_rows > 0) {
+                $errors[] = "Username '" . htmlspecialchars($username_baru) . "' sudah digunakan oleh pengguna lain.";
+            }
+            $stmt_cek->close();
+        } else {
+            $errors[] = "Gagal melakukan pengecekan username: " . htmlspecialchars($conn->error);
+        }
+    }
+
+    if (!empty($errors)) {
+        $_SESSION['flash_message_akun_wk'] = ['type' => 'error', 'messages' => $errors];
+        header('Location: edit_akun.php');
+        exit;
+    } else {
+        $sql_parts = [];
+        $params_values = [];
+        $types = "";
+        $ada_perubahan_data = false;
+
+        if ($username_baru !== $username_saat_ini) {
+            $sql_parts[] = "username = ?";
+            $params_values[] = $username_baru;
+            $types .= "s";
+            $ada_perubahan_data = true;
+        }
+
+        if ($nama_baru !== $nama_saat_ini) {
+            $sql_parts[] = "nama = ?"; // Kolom di DB adalah 'nama'
+            $params_values[] = $nama_baru;
+            $types .= "s";
+            $ada_perubahan_data = true;
+        }
+
+        if (!empty($password_baru)) {
+            $hashed_password_baru = password_hash($password_baru, PASSWORD_DEFAULT);
+            $sql_parts[] = "password = ?";
+            $params_values[] = $hashed_password_baru;
+            $types .= "s";
+            $ada_perubahan_data = true;
+        }
+
+        if ($ada_perubahan_data) {
+            $sql_update = "UPDATE users SET " . implode(", ", $sql_parts) . " WHERE id = ?";
+            $types .= "i";
+            $params_values[] = $user_id_saat_ini;
+
+            $stmt = $conn->prepare($sql_update);
+            if ($stmt) {
+                if (!empty($types) && !empty($params_values)) {
+                    $stmt->bind_param($types, ...$params_values);
+                }
+
+                if ($stmt->execute()) {
+                    $_SESSION['flash_message_akun_wk'] = ['type' => 'success', 'messages' => ['Akun berhasil diperbarui.']];
+                    
+                    if ($username_baru !== $username_saat_ini) {
+                        $_SESSION['username'] = $username_baru;
+                    }
+                    if ($nama_baru !== $nama_saat_ini) {
+                        $_SESSION['nama_user'] = $nama_baru;
+                    }
+                    header('Location: edit_akun.php?status=sukses');
+                    exit;
+                } else {
+                    $_SESSION['flash_message_akun_wk'] = ['type' => 'error', 'messages' => ['Gagal memperbarui akun: ' . htmlspecialchars($stmt->error)]];
+                    header('Location: edit_akun.php');
+                    exit;
+                }
+                $stmt->close();
+            } else {
+                $_SESSION['flash_message_akun_wk'] = ['type' => 'error', 'messages' => ['Terjadi kesalahan sistem (prepare): ' . htmlspecialchars($conn->error)]];
+                header('Location: edit_akun.php');
+                exit;
+            }
+        } else {
+            $_SESSION['flash_message_akun_wk'] = ['type' => 'info', 'messages' => ['Tidak ada perubahan data yang disimpan.']];
+            header('Location: edit_akun.php');
+            exit;
+        }
+    }
+} else {
+    $_SESSION['flash_message_akun_wk'] = ['type' => 'error', 'messages' => ['Akses tidak valid.']];
+    header('Location: edit_akun.php');
+    exit;
+}
+?>

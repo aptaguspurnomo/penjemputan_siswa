@@ -1,0 +1,18 @@
+/* Custom styles */
+body {
+    font-family: 'Arial', sans-serif;
+}
+nav a {
+    transition: background-color 0.3s;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+th, td {
+    padding: 8px;
+    text-align: left;
+}
+tr:nth-child(even) {
+    background-color: #f2f2f2;
+}

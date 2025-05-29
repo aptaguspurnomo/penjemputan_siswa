@@ -1,0 +1,78 @@
+[26-May-2025 18:27:42 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/mitm6294/public_html/jemput.mitramedikautama.id/vendor/composer/platform_check.php on line 28
+[26-May-2025 18:27:57 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/mitm6294/public_html/jemput.mitramedikautama.id/vendor/composer/platform_check.php on line 28
+[26-May-2025 18:28:20 Asia/Jakarta] PHP Fatal error:  Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home/mitm6294/public_html/jemput.mitramedikautama.id/vendor/composer/platform_check.php on line 28
+[26-May-2025 18:29:40 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/db.php:7
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/status_siswa.php(6): include()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/db.php on line 7
+[26-May-2025 18:29:46 Asia/Jakarta] PHP Fatal error:  Uncaught Error: Class "mysqli" not found in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/db.php:7
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/status_siswa.php(6): include()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/db.php on line 7
+[27-May-2025 08:21:21 Asia/Jakarta] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/manage_siswa.php:551
+Stack trace:
+#0 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/manage_siswa.php on line 551
+[27-May-2025 08:27:39 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(32): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 32
+[27-May-2025 08:27:44 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(32): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 32
+[27-May-2025 08:27:49 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(32): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 32
+[27-May-2025 08:28:34 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'footer_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:28
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(28): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 28
+[27-May-2025 08:28:34 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'footer_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:28
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(28): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 28
+[27-May-2025 08:29:46 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(32): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 32
+[27-May-2025 08:33:16 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:32
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(32): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 32
+[27-May-2025 08:36:39 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:39
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(39): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 39
+[27-May-2025 08:36:39 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php:39
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(39): mysqli->query()
+#1 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php on line 39
+[27-May-2025 08:38:32 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/header.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/header.php(37): mysqli->query()
+#1 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(226): require_once('/home/mitm6294/...')
+#2 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/header.php on line 37
+[27-May-2025 08:38:32 Asia/Jakarta] PHP Fatal error:  Uncaught mysqli_sql_exception: Unknown column 'header_color' in 'SELECT' in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/header.php:37
+Stack trace:
+#0 /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/header.php(37): mysqli->query()
+#1 /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/index.php(226): require_once('/home/mitm6294/...')
+#2 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/includes/header.php on line 37
+[27-May-2025 09:08:26 Asia/Jakarta] PHP Fatal error:  Uncaught Error: mysqli_stmt object is already closed in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/manage_siswa.php:551
+Stack trace:
+#0 {main}
+  thrown in /home/mitm6294/public_html/jemput.mitramedikautama.id/admin/manage_siswa.php on line 551

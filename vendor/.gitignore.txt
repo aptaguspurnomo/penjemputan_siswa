@@ -1,0 +1,15 @@
+# Ignore uploads folder
+assets/uploads/*
+
+# Ignore composer dependencies
+vendor/
+
+# Ignore PHP session files
+*.php_session
+
+# Ignore IDE files
+.idea/
+*.code-workspace
+
+# Ignore database credentials (if any)
+includes/config.php
