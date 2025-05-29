@@ -26,6 +26,24 @@ function hashPassword($password) {
 }
 // -------------------------------------------
 
+// --- Fungsi Format Status Penjemputan (agar konsisten dengan status_penjemputan.php) ---
+function formatStatusDisplayUmum($status_db) {
+    if ($status_db === null || $status_db === '') {
+        return 'Belum ada info';
+    }
+    $status_map = [
+        'masuk_kelas' => 'Masuk Kelas',
+        'proses_belajar' => 'Proses Belajar',
+        'perjalanan_jemput' => 'Wali Murid OTW Jemput',
+        'lima_menit_sampai' => 'Penjemput ±5 Menit Lagi',
+        'sudah_sampai_sekolah' => 'Penjemput Tiba',
+        'sudah_dijemput' => 'Sudah Dijemput',
+        'tidak_hadir_info_jemput' => 'Tidak Hadir (Info Wali Murid)'
+    ];
+    return $status_map[$status_db] ?? ucfirst(str_replace('_', ' ', $status_db));
+}
+// ---------------------------------------------------
+
 // 4. Logika Pemrosesan Form (Tambah, Hapus, Upload) - SEMUA DI SINI SEBELUM HEADER
 // Logika Tambah siswa (form manual)
 if (isset($_POST['tambah'])) {
@@ -492,18 +510,31 @@ include '../includes/header.php';
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama Wali</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Username Wali</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Pass Wali (Hash)</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status Jemput Terakhir</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Penjemput</th>
+                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu Update</th>
                     <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Aksi</th>
                 </tr>
             </thead>
             <tbody class="bg-white divide-y divide-gray-200">
                 <?php
-                // Query untuk menampilkan siswa dengan filter kelas
+                // Query untuk menampilkan siswa dengan filter kelas dan status penjemputan terakhir hari ini
                 $sql_select_siswa_display = "SELECT s.id AS siswa_id, s.nama_siswa, k.nama_kelas, 
                                             u.nama AS nama_wali_murid, u.username AS username_wali_murid,
-                                            u.password AS password_wali_hashed 
+                                            u.password AS password_wali_hashed, 
+                                            sp.status AS status_penjemputan_terakhir, sp.nama_penjemput, sp.waktu_update_status
                                      FROM siswa s
                                      LEFT JOIN kelas k ON s.kelas_id = k.id
-                                     LEFT JOIN users u ON s.id_wali_murid = u.id ";
+                                     LEFT JOIN users u ON s.id_wali_murid = u.id
+                                     LEFT JOIN (
+                                        SELECT sp1.* FROM status_penjemputan sp1
+                                        INNER JOIN (
+                                            SELECT siswa_id, MAX(waktu_update_status) AS max_waktu
+                                            FROM status_penjemputan
+                                            WHERE DATE(waktu_update_status) = CURDATE()
+                                            GROUP BY siswa_id
+                                        ) sp2 ON sp1.siswa_id = sp2.siswa_id AND sp1.waktu_update_status = sp2.max_waktu
+                                     ) sp ON s.id = sp.siswa_id ";
                 $params_select_siswa_display = [];
                 $types_select_siswa_display = "";
 
@@ -530,7 +561,6 @@ include '../includes/header.php';
                     $stmt_select_siswa_display->close();
                 }
 
-
                 if (!empty($data_siswa_tabel_display)) {
                     foreach ($data_siswa_tabel_display as $row_siswa_item_display) {
                         echo "<tr>
@@ -539,15 +569,27 @@ include '../includes/header.php';
                                 <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>" . htmlspecialchars($row_siswa_item_display['nama_kelas'] ?? 'N/A') . "</td>
                                 <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>" . htmlspecialchars($row_siswa_item_display['nama_wali_murid'] ?? 'N/A') . "</td>
                                 <td class='px-6 py-4 whitespace-nowrap text-sm text-gray-500'>" . htmlspecialchars($row_siswa_item_display['username_wali_murid'] ?? 'N/A') . "</td>
-                                <td class='px-6 py-4 whitespace-nowrap text-xs text-gray-400 break-all' title='" . htmlspecialchars($row_siswa_item_display['password_wali_hashed'] ?? 'N/A') . "'>" . (!empty($row_siswa_item_display['password_wali_hashed']) ? substr(htmlspecialchars($row_siswa_item_display['password_wali_hashed']), 0, 10) . "..." : 'N/A') . "</td>
-                                <td class='px-6 py-4 whitespace-nowrap text-sm font-medium space-x-1 md:space-x-2'>
+                                <td class='px-6 py-4 whitespace-nowrap text-xs text-gray-400 break-all' title='" . htmlspecialchars($row_siswa_item_display['password_wali_hashed'] ?? 'N/A') . "'>" . (!empty($row_siswa_item_display['password_wali_hashed']) ? substr(htmlspecialchars($row_siswa_item_display['password_wali_hashed']), 0, 10) . "..." : 'N/A') . "</td>\n" .
+                                // Kolom status penjemputan
+                                "<td class='px-6 py-4 whitespace-nowrap text-xs'>" .
+                                    (isset($row_siswa_item_display['status_penjemputan_terakhir']) ?
+                                        htmlspecialchars(formatStatusDisplayUmum($row_siswa_item_display['status_penjemputan_terakhir'])) :
+                                        "<span class='text-gray-400'>-</span>") .
+                                "</td>\n" .
+                                "<td class='px-6 py-4 whitespace-nowrap text-xs text-gray-500'>" .
+                                    (isset($row_siswa_item_display['nama_penjemput']) && $row_siswa_item_display['nama_penjemput'] !== null ? htmlspecialchars($row_siswa_item_display['nama_penjemput']) : '-') .
+                                "</td>\n" .
+                                "<td class='px-6 py-4 whitespace-nowrap text-xs text-gray-400'>" .
+                                    (!empty($row_siswa_item_display['waktu_update_status']) ? (new DateTime($row_siswa_item_display['waktu_update_status']))->format('H:i, d M Y') : '-') .
+                                "</td>\n" .
+                                "<td class='px-6 py-4 whitespace-nowrap text-sm font-medium space-x-1 md:space-x-2'>
                                     <a href='edit_siswa.php?id=" . htmlspecialchars($row_siswa_item_display['siswa_id']) . ($selected_kelas_id_filter ? '&ref_kelas_id='.$selected_kelas_id_filter.'&ref_page=manage_siswa' : '&ref_page=manage_siswa') . "' class='text-indigo-600 hover:text-indigo-900' title='Edit Data Siswa'><i class='fas fa-user-edit'></i><span class='hidden sm:inline ml-1'>Edit</span></a>
                                     <a href='manage_siswa.php?hapus=" . htmlspecialchars($row_siswa_item_display['siswa_id']) . ($selected_kelas_id_filter ? '&filter_kelas_id='.$selected_kelas_id_filter : '') . "' class='text-red-600 hover:text-red-900' onclick='return confirm(\"Hapus siswa " . htmlspecialchars(addslashes($row_siswa_item_display['nama_siswa'])) . "? Ini juga akan menghapus riwayat statusnya.\")' title='Hapus Siswa'><i class='fas fa-trash'></i><span class='hidden sm:inline ml-1'>Hapus</span></a>
                                 </td>
                               </tr>";
                     }
                 } else {
-                    $colspan_tabel_display = 7;
+                    $colspan_tabel_display = 10;
                      if (isset($stmt_select_siswa_display) && $stmt_select_siswa_display && $stmt_select_siswa_display->error) {
                         echo "<tr><td colspan='$colspan_tabel_display' class='px-6 py-4 text-sm text-red-500 text-center'>Gagal mengambil data siswa.</td></tr>";
                     } else {
